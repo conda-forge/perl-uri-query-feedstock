@@ -4,15 +4,15 @@
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://cpan.metacpan.org/authors/id/G/GA/GAVINC/URI-Query-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [win]
+  noarch: generic
+  number: 1
   run_exports:
     weak:
       - {{ name }} ={{ version }}
@@ -26,6 +26,7 @@ requirements:
     - perl-uri
   run:
     - perl
+    - perl-clone
 
 test:
   imports:
@@ -37,9 +38,7 @@ about:
   description: |
     URI::Query provides simple URI query string manipulation, allowing you to create and manipulate URI query strings from GET and POST requests in web applications. This is primarily useful for creating links where you wish to preserve some subset of the parameters to the current request, and potentially add or replace others. Given a query string this is doable with regexes, of course, but making sure you get the anchoring and escaping right is tedious and error-prone - this module is simpler.
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
-  license_file:
-    - {{ environ["PREFIX"] }}/man/man1/perlartistic.1
-    - {{ environ["PREFIX"] }}/man/man1/perlgpl.1
+  license_file: LICENSE
   dev_url: https://github.com/gavincarr/URI-Query
 
 extra:
